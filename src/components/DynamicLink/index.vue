@@ -33,7 +33,6 @@ export default {
   },
 
   mounted() {
-    console.log(1111)
     this.loader()
       .then(() => {
         this.component = () => this.loader()

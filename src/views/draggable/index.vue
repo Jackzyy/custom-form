@@ -1,91 +1,81 @@
 <template>
   <el-row class="draggable">
-    <!-- 组件集合区域 -->
-    <el-col :span="12">
-      <draggable
-        v-model="eleLists"
+    <!-- 组件集区域 -->
+    <el-col :span="4" class="draggable-elements">
+      <span class="draggable-elements-title">基础组件</span>
+      <Draggable
+        v-model="basicProp"
         v-bind="dragOptions"
+        key="elements"
         :group="{ name: 'draggable', pull: 'clone', put: false }"
         :clone="cloneEle"
         :sort="false"
-        @start="drag = true"
-        @end="drag = false"
       >
-        <i v-for="ele in eleLists" :key="ele.id" :class="ele.icon"></i>
-      </draggable>
+        <Cell
+          v-for="ele in basicProp"
+          :key="ele.id"
+          :icon="ele.icon"
+          :name="ele.name"
+        />
+      </Draggable>
     </el-col>
     <!-- 组件拖拽回显区域 -->
-    <el-col :span="12" ref="ele">
-      <draggable
-        v-model="formLists"
-        v-bind="dragOptions"
-        group="draggable"
-        @start="drag = true"
-        @end="drag = false"
-      >
-        <DynamicLink
-          v-for="item in formLists"
-          :key="item.id"
-          :data="item"
-          :type="item.type"
-        />
-      </draggable>
-      <!-- 组件属性设置区域 -->
+    <el-col :span="16" class="draggable-echo">
+      <div class="draggable-echo-head" shadow="never">
+        <el-button type="text" icon="el-icon-edit">预览</el-button>
+      </div>
+      <span class="draggable-echo-tips" v-if="!formLists.length">
+        从左侧拖拽添加表单组件
+      </span>
+      <!-- 自定义表单 -->
+      <el-form>
+        <el-scrollbar>
+          <Draggable
+            class="draggable-echo-area"
+            v-model="formLists"
+            v-bind="dragOptions"
+            key="area"
+            group="draggable"
+          >
+            <el-form-item v-for="item in formLists" :key="item.id">
+              <DynamicLink :data="item" :type="item.type" />
+            </el-form-item>
+          </Draggable>
+        </el-scrollbar>
+      </el-form>
+    </el-col>
+    <!-- 组件属性设置区域 -->
+    <el-col :span="4" class="draggable-attr">
+      <el-tabs v-model="activeName" stretch>
+        <el-tab-pane label="字段属性" name="first">
+          <span>字段属性</span>
+        </el-tab-pane>
+        <el-tab-pane label="表单属性" name="second">
+          <span>表单属性</span>
+        </el-tab-pane>
+      </el-tabs>
     </el-col>
   </el-row>
 </template>
 
 <script>
 let idGlobal = 999
+import Draggable from 'vuedraggable'
 import DynamicLink from '@/components/DynamicLink'
+import Cell from '@/components/Cell'
+import basicProp from '@/components/Elements'
 export default {
   components: {
-    DynamicLink
+    Draggable,
+    DynamicLink,
+    Cell
   },
 
   data() {
     return {
-      drag: false,
-      eleLists: [
-        {
-          id: 1,
-          name: '输入框',
-          type: 'input',
-          icon: 'el-icon-more'
-        },
-        {
-          id: 2,
-          name: '按钮',
-          type: 'button',
-          icon: 'el-icon-info'
-        }
-      ],
-      formLists: [
-        {
-          id: 1,
-          name: '输入框',
-          type: 'input',
-          icon: 'el-icon-more'
-        },
-        {
-          id: 2,
-          name: '按钮',
-          type: 'button',
-          icon: 'el-icon-info'
-        },
-        {
-          id: 3,
-          name: '按钮',
-          type: 'button',
-          icon: 'el-icon-info'
-        },
-        {
-          id: 4,
-          name: '按钮',
-          type: 'button',
-          icon: 'el-icon-info'
-        }
-      ]
+      basicProp,
+      formLists: [],
+      activeName: 'first'
     }
   },
 
@@ -111,4 +101,41 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.draggable {
+  &-elements {
+    height: 100vh;
+    &-title {
+      display: inline-block;
+      font-size: 14px;
+      padding: 10px;
+    }
+  }
+  &-echo {
+    height: 100vh;
+    border-left: 1px solid #eeeeee;
+    border-right: 1px solid #eeeeee;
+    position: relative;
+    &-head {
+      width: 100%;
+      height: 60px;
+      line-height: 60px;
+      padding: 0 20px;
+      border-bottom: 1px solid #eeeeee;
+    }
+    &-tips {
+      font-size: 22px;
+      color: #ccc;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &-area {
+      box-sizing: border-box;
+      height: calc(100vh - 62px);
+      padding: 20px;
+    }
+  }
+}
+</style>

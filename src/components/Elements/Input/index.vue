@@ -1,7 +1,6 @@
 <template>
   <div class="input">
     <el-input></el-input>
-    <el-button @click="click">AAA</el-button>
   </div>
 </template>
 
@@ -15,12 +14,6 @@ export default {
     },
     name: {
       type: String
-    }
-  },
-
-  methods: {
-    click() {
-      this.$emit('btnClick', '111111')
     }
   }
 }

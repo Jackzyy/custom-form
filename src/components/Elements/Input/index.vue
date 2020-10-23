@@ -23,17 +23,18 @@ export default {
     }
   },
 
-  computed: {
-    inputVal: {
-      get() {
-        return this.$store.state.formData[`${this.type}_${this.id}`]
-      },
-      set(val) {
-        this.$store.commit('SET_FORMDATA', {
-          key: `${this.type}_${this.id}`,
-          val
-        })
-      }
+  data() {
+    return {
+      inputVal: ''
+    }
+  },
+
+  watch: {
+    inputVal(val) {
+      this.$store.commit('SET_FORMDATA', {
+        key: `${this.type}_${this.id}`,
+        val
+      })
     }
   }
 }

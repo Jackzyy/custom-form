@@ -1,5 +1,10 @@
 <template>
-  <component :is="component" v-bind="linkProps()" v-on="$listeners" />
+  <component
+    class="dynamic-link"
+    :is="component"
+    v-bind="linkProps()"
+    v-on="$listeners"
+  />
 </template>
 <script>
 export default {
@@ -55,3 +60,5 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped></style>

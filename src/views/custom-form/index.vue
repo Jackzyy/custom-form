@@ -37,13 +37,15 @@
             key="area"
             group="draggable"
           >
-            <el-form-item
+            <Widget
+              class="draggable-echo-area__item"
               v-for="item in formOptions"
               :key="item.id"
-              :label="item.name"
             >
-              <DynamicLink :data="item" :type="item.type" />
-            </el-form-item>
+              <el-form-item :key="item.id" :label="item.name">
+                <DynamicLink :data="item" :type="item.type" />
+              </el-form-item>
+            </Widget>
           </Draggable>
         </el-scrollbar>
       </el-form>
@@ -68,11 +70,13 @@ import Draggable from 'vuedraggable'
 import DynamicLink from '@/components/DynamicLink'
 import Cell from '@/components/Cell'
 import basicProp from '@/components/Elements'
+import Widget from '@/components/Widget'
 export default {
   components: {
     Draggable,
     DynamicLink,
-    Cell
+    Cell,
+    Widget
   },
 
   data() {
@@ -97,16 +101,6 @@ export default {
       },
       set(val) {
         this.$store.commit('SET_FORMOPTIONS', val)
-        // 动态添加表单数据值
-        let formDataKeys = Object.keys(this.$store.state.formData)
-        val.forEach(item => {
-          if (formDataKeys.indexOf(`${item.type}${item.id}` === -1)) {
-            this.$store.commit('SET_FORMDATA', {
-              key: `${item.type}_${item.id}`,
-              val: ''
-            })
-          }
-        })
       }
     }
   },

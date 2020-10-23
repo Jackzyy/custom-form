@@ -6,8 +6,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Draggable',
-    component: () => import('@/views/draggable')
+    name: 'CustomForm',
+    component: () => import('@/views/custom-form')
   },
   {
     path: '/test',

@@ -24,7 +24,7 @@
       <div class="draggable-echo-head" shadow="never">
         <el-button type="text" icon="el-icon-edit">预览</el-button>
       </div>
-      <span class="draggable-echo-tips" v-if="!formLists.length">
+      <span class="draggable-echo-tips" v-if="!formOptions.length">
         从左侧拖拽添加表单组件
       </span>
       <!-- 自定义表单 -->
@@ -32,12 +32,16 @@
         <el-scrollbar>
           <Draggable
             class="draggable-echo-area"
-            v-model="formLists"
+            v-model="formOptions"
             v-bind="dragOptions"
             key="area"
             group="draggable"
           >
-            <el-form-item v-for="item in formLists" :key="item.id">
+            <el-form-item
+              v-for="item in formOptions"
+              :key="item.id"
+              :label="item.name"
+            >
               <DynamicLink :data="item" :type="item.type" />
             </el-form-item>
           </Draggable>
@@ -74,7 +78,6 @@ export default {
   data() {
     return {
       basicProp,
-      formLists: [],
       activeName: 'first'
     }
   },
@@ -86,6 +89,24 @@ export default {
         group: 'description',
         disabled: false,
         ghostClass: 'ghost'
+      }
+    },
+    formOptions: {
+      get() {
+        return this.$store.state.formOptions
+      },
+      set(val) {
+        this.$store.commit('SET_FORMOPTIONS', val)
+        // 动态添加表单数据值
+        let formDataKeys = Object.keys(this.$store.state.formData)
+        val.forEach(item => {
+          if (formDataKeys.indexOf(`${item.type}${item.id}` === -1)) {
+            this.$store.commit('SET_FORMDATA', {
+              key: `${item.type}_${item.id}`,
+              val: ''
+            })
+          }
+        })
       }
     }
   },

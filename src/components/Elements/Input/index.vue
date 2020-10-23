@@ -1,6 +1,6 @@
 <template>
   <div class="input">
-    <el-input></el-input>
+    <el-input v-model="inputVal"></el-input>
   </div>
 </template>
 
@@ -10,10 +10,30 @@ export default {
     id: {
       type: Number,
       required: true,
-      default: 0
+      default: -1
     },
-    name: {
-      type: String
+    type: {
+      type: String,
+      required: true
+    },
+    options: {
+      type: Object,
+      required: true,
+      default: () => {}
+    }
+  },
+
+  computed: {
+    inputVal: {
+      get() {
+        return this.$store.state.formData[`${this.type}_${this.id}`]
+      },
+      set(val) {
+        this.$store.commit('SET_FORMDATA', {
+          key: `${this.type}_${this.id}`,
+          val
+        })
+      }
     }
   }
 }

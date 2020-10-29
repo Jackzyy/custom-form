@@ -120,7 +120,13 @@ export default {
     },
     // 排序后重新赋lastSelectIndex值
     onSort(evt) {
-      if (!evt.pullMode) this.lastSelectIndex = evt.newIndex
+      if (!evt.pullMode) {
+        this.lastSelectIndex = evt.newIndex
+      }
+      // 防止数组越界
+      if (evt.pullMode && evt.newIndex < this.lastSelectIndex + 1) {
+        this.lastSelectIndex++
+      }
     },
     // 选中组件，避免使用循环
     hanleSelect(index) {

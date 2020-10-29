@@ -36,11 +36,15 @@
             v-bind="dragOptions"
             key="area"
             group="draggable"
+            handle=".widget-move"
+            @sort="onSort"
           >
             <Widget
               class="draggable-echo-area__item"
-              v-for="item in formOptions"
+              v-for="(item, index) in formOptions"
               :key="item.id"
+              :widgetSelect="item.widgetSelect"
+              @click.native="hanleSelect(index)"
             >
               <el-form-item :key="item.id" :label="item.name">
                 <DynamicLink :data="item" :type="item.type" />
@@ -82,7 +86,9 @@ export default {
   data() {
     return {
       basicProp,
-      activeName: 'first'
+      activeName: 'first',
+      lastSelectIndex: -1,
+      selectComponentVal: {}
     }
   },
 
@@ -111,6 +117,18 @@ export default {
         ...val,
         id: idGlobal++
       }
+    },
+    // 排序后重新赋lastSelectIndex值
+    onSort(evt) {
+      if (!evt.pullMode) this.lastSelectIndex = evt.newIndex
+    },
+    // 选中组件，避免使用循环
+    hanleSelect(index) {
+      if (this.lastSelectIndex !== -1)
+        this.formOptions[this.lastSelectIndex].widgetSelect = false
+      this.selectComponentVal = this.formOptions[index]
+      this.formOptions[index].widgetSelect = true
+      this.lastSelectIndex = index
     }
   }
 }

@@ -4,6 +4,7 @@ let basicProp = [
     type: 'input',
     icon: 'el-icon-more',
     name: '单行文本',
+    widgetSelect: false,
     options: {
       width: '100%',
       defaultValue: '',
@@ -19,6 +20,7 @@ let basicProp = [
     type: 'button',
     icon: 'el-icon-info',
     name: '按钮',
+    widgetSelect: false,
     options: {
       type: 'primary'
     }

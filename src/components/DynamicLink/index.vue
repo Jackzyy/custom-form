@@ -19,6 +19,10 @@ export default {
       type: String,
       required: true,
       default: 'Error'
+    },
+    option: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -30,6 +34,9 @@ export default {
 
   computed: {
     loader() {
+      if (this.type && this.option)
+        return () =>
+          import(`@/components/Elements/${this.titleCase(this.type)}/option`)
       if (this.type)
         return () =>
           import(`@/components/Elements/${this.titleCase(this.type)}`)

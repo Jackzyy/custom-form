@@ -19,13 +19,11 @@ export default {
 <style lang="scss" scoped>
 .widget {
   padding: 10px 20px;
-  margin-bottom: 6px;
   border: 1px dashed rgba(0, 0, 0, 0);
 }
 .widget-focus {
   position: relative;
   padding: 10px 20px;
-  margin-bottom: 6px;
   border-radius: 5px;
   border: 1px dashed #409eff;
 }

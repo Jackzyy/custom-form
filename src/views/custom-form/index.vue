@@ -47,7 +47,7 @@
               @click.native="hanleSelect(index)"
             >
               <el-form-item :key="item.id" :label="item.name">
-                <DynamicLink :data="item" :type="item.type" />
+                <DynamicLink :data="item" :type="item.type" :key="item.id" />
               </el-form-item>
             </Widget>
           </Draggable>
@@ -58,7 +58,13 @@
     <el-col :span="4" class="draggable-attr">
       <el-tabs v-model="activeName" stretch>
         <el-tab-pane label="字段属性" name="first">
-          <span>字段属性</span>
+          <DynamicLink
+            v-if="selectComponentVal.type"
+            option
+            :data="{ selectComponentVal, selectIndex }"
+            :type="selectComponentVal.type"
+            :key="selectComponentVal.id"
+          />
         </el-tab-pane>
         <el-tab-pane label="表单属性" name="second">
           <span>表单属性</span>
@@ -75,6 +81,7 @@ import DynamicLink from '@/components/DynamicLink'
 import Cell from '@/components/Cell'
 import basicProp from '@/components/Elements'
 import Widget from '@/components/Widget'
+import { mapFields } from 'vuex-map-fields'
 export default {
   components: {
     Draggable,
@@ -87,8 +94,9 @@ export default {
     return {
       basicProp,
       activeName: 'first',
-      lastSelectIndex: -1,
-      selectComponentVal: {}
+      selectComponentVal: {},
+      selectIndex: -1,
+      lastSelectIndex: -1
     }
   },
 
@@ -101,14 +109,7 @@ export default {
         ghostClass: 'ghost'
       }
     },
-    formOptions: {
-      get() {
-        return this.$store.state.formOptions
-      },
-      set(val) {
-        this.$store.commit('SET_FORMOPTIONS', val)
-      }
-    }
+    ...mapFields(['formOptions'])
   },
 
   methods: {
@@ -120,18 +121,17 @@ export default {
     },
     // 排序后重新赋lastSelectIndex值
     onSort(evt) {
-      if (!evt.pullMode) {
-        this.lastSelectIndex = evt.newIndex
-      }
       // 防止数组越界
       if (evt.pullMode && evt.newIndex < this.lastSelectIndex + 1) {
         this.lastSelectIndex++
       }
+      this.hanleSelect(evt.newIndex)
     },
-    // 选中组件，避免使用循环
+    // 选中组件，应避免使用循环
     hanleSelect(index) {
       if (this.lastSelectIndex !== -1)
         this.formOptions[this.lastSelectIndex].widgetSelect = false
+      this.selectIndex = index
       this.selectComponentVal = this.formOptions[index]
       this.formOptions[index].widgetSelect = true
       this.lastSelectIndex = index

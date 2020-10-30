@@ -6,6 +6,7 @@
     v-on="$listeners"
   />
 </template>
+
 <script>
 export default {
   name: 'dynamic-link',
@@ -44,20 +45,31 @@ export default {
     }
   },
 
+  watch: {
+    type() {
+      this.mountComponent()
+    }
+  },
+
   mounted() {
-    this.loader()
-      .then(() => {
-        this.component = () => this.loader()
-      })
-      .catch(() => {
-        this.component = () => import('@/components/Error')
-      })
+    this.mountComponent()
   },
 
   methods: {
+    mountComponent() {
+      this.loader()
+        .then(() => {
+          this.component = () => this.loader()
+        })
+        .catch(err => {
+          this.component = () => import('@/components/Error')
+          throw err
+        })
+    },
+
     linkProps() {
       return {
-        ...this.data
+        data: this.data
       }
     },
 

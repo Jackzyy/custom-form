@@ -7,16 +7,7 @@
 <script>
 export default {
   props: {
-    id: {
-      type: Number,
-      required: true,
-      default: -1
-    },
-    type: {
-      type: String,
-      required: true
-    },
-    options: {
+    data: {
       type: Object,
       required: true,
       default: () => {}
@@ -27,16 +18,16 @@ export default {
     return {
       inputVal: ''
     }
-  },
-
-  watch: {
-    inputVal(val) {
-      this.$store.commit('SET_FORMDATA', {
-        key: `${this.type}_${this.id}`,
-        val
-      })
-    }
   }
+
+  // watch: {
+  //   inputVal(val) {
+  //     this.$store.commit('SET_FORMDATA', {
+  //       key: `${this.type}_${this.id}`,
+  //       val
+  //     })
+  //   }
+  // }
 }
 </script>
 

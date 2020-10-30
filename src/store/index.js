@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { getField, updateField } from 'vuex-map-fields'
 
 Vue.use(Vuex)
 
@@ -9,13 +10,12 @@ export default new Vuex.Store({
     formData: {} // 自定义表单数据
   },
 
+  getters: {
+    getField
+  },
+
   mutations: {
-    SET_FORMOPTIONS(state, payload) {
-      state.formOptions = payload
-    },
-    SET_FORMDATA(state, { key, val }) {
-      state.formData[key] = val
-    }
+    updateField
   },
 
   actions: {},

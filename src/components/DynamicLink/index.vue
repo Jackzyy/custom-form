@@ -37,7 +37,7 @@ export default {
     loader() {
       if (this.type && this.option)
         return () =>
-          import(`@/components/Elements/${this.titleCase(this.type)}/option`)
+          import(`@/components/Elements/${this.titleCase(this.type)}/options`)
       if (this.type)
         return () =>
           import(`@/components/Elements/${this.titleCase(this.type)}`)

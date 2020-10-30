@@ -1,6 +1,6 @@
 <template>
-  <div>
-    Error
+  <div class="error">
+    Components Error !
   </div>
 </template>
 

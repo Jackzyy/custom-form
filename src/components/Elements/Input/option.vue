@@ -1,27 +1,14 @@
 <template>
   <div>
-    <el-input></el-input>
+    <el-input v-model="options.name"></el-input>
     <div>{{ options }}</div>
   </div>
 </template>
 
 <script>
-import { mapFields } from 'vuex-map-fields'
+import options from '@/mixins/options'
 export default {
-  props: {
-    data: {
-      type: Object,
-      required: true,
-      default: () => {}
-    }
-  },
-
-  computed: {
-    ...mapFields(['formOptions']),
-    options() {
-      return this.formOptions[this.data.selectIndex]
-    }
-  }
+  mixins: [options]
 }
 </script>
 

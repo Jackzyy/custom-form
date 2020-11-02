@@ -1,3 +1,6 @@
+/**
+ * 组件基础属性统一出口
+ */
 let basicProp = [
   {
     id: 1,
@@ -5,9 +8,9 @@ let basicProp = [
     icon: 'el-icon-more',
     name: '单行文本',
     widgetSelect: false,
-    options: {
-      width: '100%',
+    attributes: {
       defaultValue: '',
+      styles: 'width:100%',
       required: false,
       dataType: 'string',
       pattern: '',
@@ -21,7 +24,7 @@ let basicProp = [
     icon: 'el-icon-info',
     name: '按钮',
     widgetSelect: false,
-    options: {
+    attributes: {
       type: 'primary'
     }
   }

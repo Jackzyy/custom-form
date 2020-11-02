@@ -1,33 +1,18 @@
 <template>
-  <div class="input">
-    <el-input v-model="inputVal"></el-input>
+  <div>
+    <el-input
+      v-model="attributes.defaultValue"
+      :disabled="attributes.disabled"
+      :placeholder="attributes.placeholder"
+      :style="attributes.styles"
+    />
   </div>
 </template>
 
 <script>
+import options from '@/mixins/options'
 export default {
-  props: {
-    data: {
-      type: Object,
-      required: true,
-      default: () => {}
-    }
-  },
-
-  data() {
-    return {
-      inputVal: ''
-    }
-  }
-
-  // watch: {
-  //   inputVal(val) {
-  //     this.$store.commit('SET_FORMDATA', {
-  //       key: `${this.type}_${this.id}`,
-  //       val
-  //     })
-  //   }
-  // }
+  mixins: [options]
 }
 </script>
 

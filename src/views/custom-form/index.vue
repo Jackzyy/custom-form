@@ -22,7 +22,9 @@
     <!-- 组件拖拽回显区域 -->
     <el-col :span="16" class="draggable-echo">
       <div class="draggable-echo-head" shadow="never">
-        <el-button type="text" icon="el-icon-edit">预览</el-button>
+        <el-button type="text" icon="el-icon-edit" @click="handlePreview">
+          预览
+        </el-button>
       </div>
       <span class="draggable-echo-tips" v-if="!formOptions.length">
         从左侧拖拽添加表单组件
@@ -47,7 +49,11 @@
               @click.native="hanleSelect(index)"
             >
               <el-form-item :key="item.id" :label="item.name">
-                <DynamicLink :data="item" :type="item.type" :key="item.id" />
+                <DynamicLink
+                  :data="{ item, selectIndex: index }"
+                  :type="item.type"
+                  :key="item.id"
+                />
               </el-form-item>
             </Widget>
           </Draggable>
@@ -59,6 +65,7 @@
       <el-tabs v-model="activeName" stretch>
         <el-tab-pane label="字段属性" name="first">
           <DynamicLink
+            class="draggable-attr-options"
             v-if="selectComponentVal.type"
             option
             :data="{ selectComponentVal, selectIndex }"
@@ -114,9 +121,12 @@ export default {
 
   methods: {
     cloneEle(val) {
+      let afterCloneId = ++idGlobal
       return {
-        ...val,
-        id: idGlobal++
+        // 深拷贝
+        ...JSON.parse(JSON.stringify(val)),
+        id: afterCloneId,
+        keyModel: `${val.type}_${afterCloneId}`
       }
     },
     // 排序后重新赋lastSelectIndex值
@@ -135,6 +145,9 @@ export default {
       this.selectComponentVal = this.formOptions[index]
       this.formOptions[index].widgetSelect = true
       this.lastSelectIndex = index
+    },
+    handlePreview() {
+      console.log(this.$store.state.formOptions)
     }
   }
 }
@@ -156,7 +169,6 @@ export default {
     border-right: 1px solid #eeeeee;
     position: relative;
     &-head {
-      width: 100%;
       height: 60px;
       line-height: 60px;
       padding: 0 20px;
@@ -174,6 +186,11 @@ export default {
       box-sizing: border-box;
       height: calc(100vh - 62px);
       padding: 20px;
+    }
+  }
+  &-attr {
+    &-options {
+      padding: 0 10px;
     }
   }
 }

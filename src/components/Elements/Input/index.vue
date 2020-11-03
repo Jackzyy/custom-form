@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import options from '@/mixins/options'
+import formOptions from '@/mixins/formOptions'
 export default {
-  mixins: [options]
+  mixins: [formOptions]
 }
 </script>
 

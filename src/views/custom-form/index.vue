@@ -53,7 +53,8 @@
                   :data="{ item, selectIndex: index }"
                   :type="item.type"
                   :key="item.id"
-                />
+                >
+                </DynamicLink>
               </el-form-item>
             </Widget>
           </Draggable>
@@ -126,6 +127,7 @@ export default {
         // 深拷贝
         ...JSON.parse(JSON.stringify(val)),
         id: afterCloneId,
+        widgetSelect: false,
         keyModel: `${val.type}_${afterCloneId}`
       }
     },

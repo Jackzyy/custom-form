@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="input">
     <el-input
       v-model="attributes.defaultValue"
       :disabled="attributes.disabled"

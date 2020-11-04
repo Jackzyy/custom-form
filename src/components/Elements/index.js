@@ -1,7 +1,7 @@
 /**
  * 组件基础属性统一出口
  * @param attributes 组件属性
- * @param children 嵌套数组
+ * @param children 布局组件属性专属
  */
 let basicProp = [
   {
@@ -17,8 +17,7 @@ let basicProp = [
       pattern: '',
       placeholder: '',
       disabled: false
-    },
-    children: []
+    }
   },
   {
     id: 2,

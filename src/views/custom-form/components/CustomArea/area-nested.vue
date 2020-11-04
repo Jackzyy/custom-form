@@ -11,16 +11,24 @@
       v-for="(item, index) in formOptions"
       :key="item.id"
       :widgetSelect="item.widgetSelect"
-      @click.native="hanleSelect(index)"
+      @click.native="hanleSelect(index, item)"
     >
-      <el-form-item :key="item.id" :label="item.name">
+      <!-- 布局组件 -->
+      <DynamicLink
+        v-if="item.children"
+        :data="{ item, selectIndex: index }"
+        :type="item.type"
+        :key="item.id"
+      >
+        <AreaNested :formOptions="item.children" :list="item.children" />
+      </DynamicLink>
+      <!-- 业务组件 -->
+      <el-form-item v-else :key="item.id" :label="item.name">
         <DynamicLink
           :data="{ item, selectIndex: index }"
           :type="item.type"
           :key="item.id"
-        >
-          <AreaNested :formOptions="item.children" />
-        </DynamicLink>
+        />
       </el-form-item>
     </Widget>
   </Draggable>
@@ -70,11 +78,15 @@ export default {
       this.hanleSelect(evt.newIndex)
     },
     // 选中组件，应避免使用循环
-    hanleSelect(index) {
-      this.$emit('hanleSelect', index)
+    hanleSelect(index, item) {
+      this.$emit('hanleSelect', index, item)
     }
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.area-nested {
+  height: 100%;
+}
+</style>

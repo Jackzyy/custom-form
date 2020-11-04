@@ -2,7 +2,7 @@
   <div class="custom-area">
     <span class="custom-area-title">基础组件</span>
     <Draggable
-      v-model="basicProp"
+      :list="basicProp"
       v-bind="dragOptions"
       :group="{ name: 'draggable', pull: 'clone', put: false }"
       :clone="cloneEle"
@@ -53,7 +53,7 @@ export default {
         // 深拷贝
         ...JSON.parse(JSON.stringify(val)),
         id: afterCloneId,
-        widgetSelect: false,
+        widgetSelect: true,
         keyModel: `${val.type}_${afterCloneId}`
       }
     }

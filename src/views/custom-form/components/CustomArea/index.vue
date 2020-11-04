@@ -25,11 +25,11 @@ export default {
 
   methods: {
     // 选中组件，应避免使用循环
-    hanleSelect(index) {
+    hanleSelect(index, selectVal) {
       let selectIndex = this.selectIndex
       if (selectIndex !== -1) this.formOptions[selectIndex].widgetSelect = false
       this.selectIndex = index
-      this.formOptions[index].widgetSelect = true
+      if (selectVal) selectVal.widgetSelect = true
     }
   }
 }

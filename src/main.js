@@ -9,6 +9,8 @@ import 'normalize.css'
 
 Vue.use(ElementUI)
 Vue.config.productionTip = false
+// 注册bus中间件
+Vue.prototype.$bus = new Vue()
 
 new Vue({
   router,

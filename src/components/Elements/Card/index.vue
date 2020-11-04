@@ -1,13 +1,17 @@
 <template>
-  <div class="card">
-    <el-card style="height:300px">
-      <slot />
-    </el-card>
-  </div>
+  <el-card>
+    <slot />
+  </el-card>
 </template>
 
 <script>
 export default {}
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.el-card {
+  /deep/.el-card__body {
+    height: 300px !important;
+  }
+}
+</style>

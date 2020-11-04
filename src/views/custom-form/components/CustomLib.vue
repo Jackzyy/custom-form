@@ -23,6 +23,7 @@ let idGlobal = 999
 import basicProp from '@/components/Elements'
 import Draggable from 'vuedraggable'
 import Cell from '@/components/Cell'
+import { mapFields } from 'vuex-map-fields'
 export default {
   components: {
     Draggable,
@@ -43,12 +44,14 @@ export default {
         disabled: false,
         ghostClass: 'ghost'
       }
-    }
+    },
+    ...mapFields(['currentSelectId'])
   },
 
   methods: {
     cloneEle(val) {
       let afterCloneId = ++idGlobal
+      this.currentSelectId = afterCloneId
       return {
         // 深拷贝
         ...JSON.parse(JSON.stringify(val)),

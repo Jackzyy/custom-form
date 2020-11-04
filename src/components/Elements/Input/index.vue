@@ -1,10 +1,10 @@
 <template>
   <div class="input">
     <el-input
-      v-model="attributes.defaultValue"
-      :disabled="attributes.disabled"
-      :placeholder="attributes.placeholder"
-      :style="attributes.styles"
+      v-model="areaAttributes.defaultValue"
+      :disabled="areaAttributes.disabled"
+      :placeholder="areaAttributes.placeholder"
+      :style="areaAttributes.styles"
     />
   </div>
 </template>

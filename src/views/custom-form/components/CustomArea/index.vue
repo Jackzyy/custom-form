@@ -3,11 +3,7 @@
     <span class="custom-area-tips" v-if="!formOptions.length">
       从左侧拖拽添加表单组件
     </span>
-    <AreaNested
-      :formOptions="formOptions"
-      :selectIndex="selectIndex"
-      @hanleSelect="hanleSelect"
-    />
+    <AreaNested :formOptions="formOptions" @hanleSelect="hanleSelect" />
   </el-form>
 </template>
 
@@ -20,16 +16,13 @@ export default {
   },
 
   computed: {
-    ...mapFields(['formOptions', 'selectIndex'])
+    ...mapFields(['formOptions', 'currentSelectId'])
   },
 
   methods: {
     // 选中组件，应避免使用循环
-    hanleSelect(index, selectVal) {
-      let selectIndex = this.selectIndex
-      if (selectIndex !== -1) this.formOptions[selectIndex].widgetSelect = false
-      this.selectIndex = index
-      if (selectVal) selectVal.widgetSelect = true
+    hanleSelect(selectVal) {
+      this.currentSelectId = selectVal.id
     }
   }
 }

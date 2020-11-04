@@ -8,15 +8,15 @@
     @sort="onSort"
   >
     <Widget
-      v-for="(item, index) in formOptions"
+      v-for="item in formOptions"
       :key="item.id"
       :widgetSelect="item.widgetSelect"
-      @click.native="hanleSelect(index, item)"
+      @click.native="hanleSelect(item)"
     >
       <!-- 布局组件 -->
       <DynamicLink
         v-if="item.children"
-        :data="{ item, selectIndex: index }"
+        :data="item"
         :type="item.type"
         :key="item.id"
       >
@@ -24,11 +24,7 @@
       </DynamicLink>
       <!-- 业务组件 -->
       <el-form-item v-else :key="item.id" :label="item.name">
-        <DynamicLink
-          :data="{ item, selectIndex: index }"
-          :type="item.type"
-          :key="item.id"
-        />
+        <DynamicLink :data="item" :type="item.type" :key="item.id" />
       </el-form-item>
     </Widget>
   </Draggable>
@@ -50,10 +46,6 @@ export default {
     formOptions: {
       type: Array,
       default: () => []
-    },
-    selectIndex: {
-      type: Number,
-      default: -1
     }
   },
 
@@ -72,14 +64,14 @@ export default {
     // 排序后重新赋lastSelectIndex值
     onSort(evt) {
       // 防止数组越界
-      if (evt.pullMode && evt.newIndex < this.selectIndex + 1) {
-        this.hanleSelect(this.selectIndex + 1)
-      }
-      this.hanleSelect(evt.newIndex)
+      // if (evt.pullMode && evt.newIndex < this.selectIndex + 1) {
+      //   this.hanleSelect(this.selectIndex + 1)
+      // }
+      // this.hanleSelect(evt.newIndex)
     },
     // 选中组件，应避免使用循环
-    hanleSelect(index, item) {
-      this.$emit('hanleSelect', index, item)
+    hanleSelect(item) {
+      this.$emit('hanleSelect', item)
     }
   }
 }

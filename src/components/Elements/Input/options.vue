@@ -8,16 +8,16 @@
         <el-input v-model="options.name" />
       </el-form-item>
       <el-form-item label="占位内容">
-        <el-input v-model="attributes.placeholder" />
+        <el-input v-model="setAttributes.placeholder" />
       </el-form-item>
       <el-form-item label="默认值">
-        <el-input v-model="attributes.defaultValue" />
+        <el-input v-model="setAttributes.defaultValue" />
       </el-form-item>
       <el-form-item label="操作属性">
-        <el-checkbox v-model="attributes.disabled">禁用</el-checkbox>
+        <el-checkbox v-model="setAttributes.disabled">禁用</el-checkbox>
       </el-form-item>
       <el-form-item label="组件样式">
-        <el-input v-model="attributes.styles" type="textarea" :rows="4" />
+        <el-input v-model="setAttributes.styles" type="textarea" :rows="4" />
       </el-form-item>
     </el-form>
   </div>

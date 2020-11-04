@@ -5,7 +5,7 @@
         class="custom-set-attr"
         v-if="selectComponentVal.type"
         option
-        :data="{ selectComponentVal, selectIndex }"
+        :data="selectComponentVal"
         :type="selectComponentVal.type"
         :key="selectComponentVal.id"
       />
@@ -18,8 +18,9 @@
 
 <script>
 import DynamicLink from '@/components/DynamicLink'
-import { mapFields } from 'vuex-map-fields'
+import formOptions from '@/mixins/formOptions'
 export default {
+  mixins: [formOptions],
   components: {
     DynamicLink
   },
@@ -31,11 +32,8 @@ export default {
   },
 
   computed: {
-    ...mapFields(['formOptions', 'selectIndex']),
     selectComponentVal() {
-      return this.formOptions[this.selectIndex]
-        ? this.formOptions[this.selectIndex]
-        : {}
+      return this.options
     }
   }
 }

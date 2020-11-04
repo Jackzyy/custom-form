@@ -4,7 +4,9 @@
     :is="component"
     v-bind="linkProps()"
     v-on="$listeners"
-  />
+  >
+    <slot />
+  </component>
 </template>
 
 <script>

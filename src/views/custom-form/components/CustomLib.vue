@@ -3,7 +3,6 @@
     <span class="custom-area-title">基础组件</span>
     <Draggable
       v-model="basicProp"
-      key="elements"
       v-bind="dragOptions"
       :group="{ name: 'draggable', pull: 'clone', put: false }"
       :clone="cloneEle"
@@ -65,6 +64,7 @@ export default {
 <style lang="scss" scoped>
 .custom-area {
   height: 100vh;
+  border-right: 1px solid #eeeeee;
   &-title {
     display: inline-block;
     font-size: 14px;

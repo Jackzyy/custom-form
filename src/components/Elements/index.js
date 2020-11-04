@@ -17,7 +17,8 @@ let basicProp = [
       pattern: '',
       placeholder: '',
       disabled: false
-    }
+    },
+    children: []
   },
   {
     id: 2,

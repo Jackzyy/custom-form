@@ -2,10 +2,10 @@
   <div class="input-formOptions">
     <el-form size="small">
       <el-form-item label="字段标识">
-        <el-input v-model="formOptions.keyModel" />
+        <el-input v-model="options.keyModel" />
       </el-form-item>
       <el-form-item label="标题">
-        <el-input v-model="formOptions.name" />
+        <el-input v-model="options.name" />
       </el-form-item>
       <el-form-item label="占位内容">
         <el-input v-model="attributes.placeholder" />

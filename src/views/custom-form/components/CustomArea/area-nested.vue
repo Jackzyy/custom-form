@@ -1,15 +1,13 @@
 <template>
   <Draggable
-    class="custom-area"
-    v-model="formOptions"
+    class="area-nested"
+    :list="formOptions"
     v-bind="dragOptions"
-    key="area"
     group="draggable"
     handle=".widget-move"
     @sort="onSort"
   >
     <Widget
-      class="custom-area-item"
       v-for="(item, index) in formOptions"
       :key="item.id"
       :widgetSelect="item.widgetSelect"
@@ -21,6 +19,7 @@
           :type="item.type"
           :key="item.id"
         >
+          <AreaNested :formOptions="item.children" />
         </DynamicLink>
       </el-form-item>
     </Widget>
@@ -31,17 +30,22 @@
 import Draggable from 'vuedraggable'
 import DynamicLink from '@/components/DynamicLink'
 import Widget from '@/components/Widget'
-import { mapFields } from 'vuex-map-fields'
 export default {
+  name: 'AreaNested',
   components: {
     Draggable,
     DynamicLink,
     Widget
   },
 
-  data() {
-    return {
-      lastSelectIndex: -1
+  props: {
+    formOptions: {
+      type: Array,
+      default: () => []
+    },
+    selectIndex: {
+      type: Number,
+      default: -1
     }
   },
 
@@ -53,35 +57,24 @@ export default {
         disabled: false,
         ghostClass: 'ghost'
       }
-    },
-    ...mapFields(['formOptions', 'selectIndex'])
+    }
   },
 
   methods: {
     // 排序后重新赋lastSelectIndex值
     onSort(evt) {
       // 防止数组越界
-      if (evt.pullMode && evt.newIndex < this.lastSelectIndex + 1) {
-        this.lastSelectIndex++
+      if (evt.pullMode && evt.newIndex < this.selectIndex + 1) {
+        this.hanleSelect(this.selectIndex + 1)
       }
       this.hanleSelect(evt.newIndex)
     },
     // 选中组件，应避免使用循环
     hanleSelect(index) {
-      if (this.lastSelectIndex !== -1)
-        this.formOptions[this.lastSelectIndex].widgetSelect = false
-      this.selectIndex = index
-      this.formOptions[index].widgetSelect = true
-      this.lastSelectIndex = index
+      this.$emit('hanleSelect', index)
     }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-.custom-area {
-  box-sizing: border-box;
-  height: calc(100vh - 62px);
-  padding: 20px;
-}
-</style>
+<style lang="scss" scoped></style>

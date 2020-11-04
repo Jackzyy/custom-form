@@ -43,6 +43,8 @@ export default {
 
 <style lang="scss" scoped>
 .custom-set {
+  height: 100vh;
+  border-left: 1px solid #eeeeee;
   &-attr {
     padding: 0 10px;
   }

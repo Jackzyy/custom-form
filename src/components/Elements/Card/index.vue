@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <el-card style="height:300px">
-      <slot></slot>
+      <slot />
     </el-card>
   </div>
 </template>

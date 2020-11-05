@@ -1,6 +1,6 @@
 <template>
   <div class="cell">
-    <i :class="icon"></i>
+    <i :class="'iconfont ' + icon"></i>
     <span>{{ name }}</span>
   </div>
 </template>
@@ -27,9 +27,8 @@ export default {
 .cell {
   font-size: 14px;
   width: 41%;
-  text-align: center;
   margin: 4.5%;
-  padding: 10px 0;
+  padding: 10px;
   display: inline-block;
   box-sizing: border-box;
   border: 1px dashed #f4f6fc;

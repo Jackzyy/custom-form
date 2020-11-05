@@ -1,6 +1,6 @@
 <template>
   <div :class="widgetSelect ? 'widget-focus' : 'widget'">
-    <i class="widget-move el-icon-thumb" v-show="widgetSelect"></i>
+    <i class="iconfont icon-tuodong widget-move" v-show="widgetSelect"></i>
     <slot />
   </div>
 </template>

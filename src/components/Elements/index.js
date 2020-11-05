@@ -7,7 +7,7 @@ let basicProp = [
   {
     id: 1,
     type: 'input',
-    icon: 'el-icon-more',
+    icon: 'icon-danhangwenben',
     name: '单行文本',
     attributes: {
       defaultValue: '',
@@ -22,7 +22,7 @@ let basicProp = [
   {
     id: 2,
     type: 'button',
-    icon: 'el-icon-info',
+    icon: 'icon-anniu',
     name: '按钮',
     attributes: {
       type: 'primary'
@@ -31,7 +31,7 @@ let basicProp = [
   {
     id: 3,
     type: 'card',
-    icon: 'el-icon-info',
+    icon: 'icon-qiapian',
     name: '卡片',
     attributes: {},
     children: []

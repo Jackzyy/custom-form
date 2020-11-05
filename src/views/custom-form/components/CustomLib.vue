@@ -23,8 +23,9 @@ let idGlobal = 999
 import basicProp from '@/components/Elements'
 import Draggable from 'vuedraggable'
 import Cell from '@/components/Cell'
-import { mapFields } from 'vuex-map-fields'
+import formOptions from '@/mixins/formOptions'
 export default {
+  mixins: [formOptions],
   components: {
     Draggable,
     Cell
@@ -44,16 +45,16 @@ export default {
         disabled: false,
         ghostClass: 'ghost'
       }
-    },
-    ...mapFields(['currentSelectId'])
+    }
   },
 
   methods: {
     cloneEle(val) {
       let afterCloneId = ++idGlobal
+      if (this.currentSelectId > 0) this.options.widgetSelect = false
       this.currentSelectId = afterCloneId
       return {
-        // 深拷贝
+        // deep clone
         ...JSON.parse(JSON.stringify(val)),
         id: afterCloneId,
         widgetSelect: true,

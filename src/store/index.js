@@ -8,7 +8,6 @@ export default new Vuex.Store({
   state: {
     formOptions: [], // 自定义表单结构
     formData: {}, // 自定义表单数据
-    selectIndex: -1, // 自定义区域选中组件的下标
     currentSelectId: -1 //  自定义区域选中组件的Id
   },
 

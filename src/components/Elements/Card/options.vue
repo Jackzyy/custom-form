@@ -1,5 +1,7 @@
 <template>
-  <div class="card-options"></div>
+  <div class="card-options">
+    Card
+  </div>
 </template>
 
 <script>

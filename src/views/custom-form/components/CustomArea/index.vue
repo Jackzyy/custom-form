@@ -3,27 +3,17 @@
     <span class="custom-area-tips" v-if="!formOptions.length">
       从左侧拖拽添加表单组件
     </span>
-    <AreaNested :formOptions="formOptions" @hanleSelect="hanleSelect" />
+    <AreaNested :_formOptions="formOptions" />
   </el-form>
 </template>
 
 <script>
 import AreaNested from './area-nested'
-import { mapFields } from 'vuex-map-fields'
+import formOptions from '@/mixins/formOptions'
 export default {
+  mixins: [formOptions],
   components: {
     AreaNested
-  },
-
-  computed: {
-    ...mapFields(['formOptions', 'currentSelectId'])
-  },
-
-  methods: {
-    // 选中组件，应避免使用循环
-    hanleSelect(selectVal) {
-      this.currentSelectId = selectVal.id
-    }
   }
 }
 </script>

@@ -1,17 +1,17 @@
 <template>
   <Draggable
     class="area-nested"
-    :list="formOptions"
+    :list="_formOptions"
     v-bind="dragOptions"
     group="draggable"
     handle=".widget-move"
     @sort="onSort"
   >
     <Widget
-      v-for="item in formOptions"
+      v-for="item in _formOptions"
       :key="item.id"
       :widgetSelect="item.widgetSelect"
-      @click.native="hanleSelect(item)"
+      @click.native.stop="hanleSelect(item.id)"
     >
       <!-- 布局组件 -->
       <DynamicLink
@@ -20,7 +20,7 @@
         :type="item.type"
         :key="item.id"
       >
-        <AreaNested :formOptions="item.children" :list="item.children" />
+        <AreaNested :_formOptions="item.children" :list="item.children" />
       </DynamicLink>
       <!-- 业务组件 -->
       <el-form-item v-else :key="item.id" :label="item.name">
@@ -34,8 +34,11 @@
 import Draggable from 'vuedraggable'
 import DynamicLink from '@/components/DynamicLink'
 import Widget from '@/components/Widget'
+import { mapFields } from 'vuex-map-fields'
+import formOptions from '@/mixins/formOptions'
 export default {
   name: 'AreaNested',
+  mixins: [formOptions],
   components: {
     Draggable,
     DynamicLink,
@@ -43,7 +46,7 @@ export default {
   },
 
   props: {
-    formOptions: {
+    _formOptions: {
       type: Array,
       default: () => []
     }
@@ -57,21 +60,18 @@ export default {
         disabled: false,
         ghostClass: 'ghost'
       }
-    }
+    },
+    ...mapFields(['currentSelectId'])
   },
 
   methods: {
-    // 排序后重新赋lastSelectIndex值
     onSort(evt) {
-      // 防止数组越界
-      // if (evt.pullMode && evt.newIndex < this.selectIndex + 1) {
-      //   this.hanleSelect(this.selectIndex + 1)
-      // }
-      // this.hanleSelect(evt.newIndex)
+      console.log(evt)
     },
-    // 选中组件，应避免使用循环
-    hanleSelect(item) {
-      this.$emit('hanleSelect', item)
+    hanleSelect(id) {
+      this.options.widgetSelect = false
+      this.currentSelectId = id
+      this.options.widgetSelect = true
     }
   }
 }

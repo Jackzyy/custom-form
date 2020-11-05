@@ -51,8 +51,8 @@ export default {
   methods: {
     cloneEle(val) {
       let afterCloneId = ++idGlobal
-      if (this.currentSelectId > 0) this.options.widgetSelect = false
-      this.currentSelectId = afterCloneId
+      // trigger clone event, but the drag is not complete, so add bufferSelectId to solve the problem
+      this.bufferSelectId = afterCloneId
       return {
         // deep clone
         ...JSON.parse(JSON.stringify(val)),

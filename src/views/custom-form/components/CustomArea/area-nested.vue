@@ -13,7 +13,7 @@
       :widgetSelect="item.widgetSelect"
       @click.native.stop="hanleSelect(item.id)"
     >
-      <!-- 布局组件 -->
+      <!-- layout components -->
       <DynamicLink
         v-if="item.children"
         :data="item"
@@ -22,7 +22,7 @@
       >
         <AreaNested :_formOptions="item.children" :list="item.children" />
       </DynamicLink>
-      <!-- 业务组件 -->
+      <!-- business components -->
       <el-form-item v-else :key="item.id" :label="item.name">
         <DynamicLink :data="item" :type="item.type" :key="item.id" />
       </el-form-item>
@@ -34,7 +34,6 @@
 import Draggable from 'vuedraggable'
 import DynamicLink from '@/components/DynamicLink'
 import Widget from '@/components/Widget'
-import { mapFields } from 'vuex-map-fields'
 import formOptions from '@/mixins/formOptions'
 export default {
   name: 'AreaNested',
@@ -60,13 +59,14 @@ export default {
         disabled: false,
         ghostClass: 'ghost'
       }
-    },
-    ...mapFields(['currentSelectId'])
+    }
   },
 
   methods: {
-    onSort(evt) {
-      console.log(evt)
+    onSort() {
+      // drag is complete, assign a value
+      if (this.currentSelectId > 0) this.options.widgetSelect = false
+      this.currentSelectId = this.bufferSelectId
     },
     hanleSelect(id) {
       this.options.widgetSelect = false

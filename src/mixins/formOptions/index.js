@@ -2,26 +2,31 @@ import { mapFields } from 'vuex-map-fields'
 
 export default {
   props: {
+    // custom area prop data
     data: {
       type: Object,
+      required: false,
       default: () => {}
     }
   },
 
   computed: {
-    ...mapFields(['formOptions', 'currentSelectId']),
+    ...mapFields(['formOptions', 'currentSelectId', 'bufferSelectId']),
     options() {
       return this.searchOptions(this.formOptions, this.currentSelectId)
     },
+    // custom set attributes
     setAttributes() {
       return this.options.attributes
     },
+    // custom area attributes
     areaAttributes() {
       return this.data.attributes
     }
   },
 
   methods: {
+    // recursive search currentSelectCom
     searchOptions(formOptions, currentSelectId) {
       let currentSelectCom = {}
       formOptions.forEach(item => {

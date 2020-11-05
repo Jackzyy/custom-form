@@ -5,7 +5,7 @@
     v-bind="dragOptions"
     group="draggable"
     handle=".widget-move"
-    @sort="onSort"
+    @add="onAdd"
   >
     <Widget
       v-for="item in _formOptions"
@@ -63,14 +63,18 @@ export default {
   },
 
   methods: {
-    onSort() {
-      // drag is complete, assign a value
-      if (this.currentSelectId > 0) this.options.widgetSelect = false
+    onAdd() {
+      if (
+        this.currentSelectId > 0 &&
+        this.currentSelectId !== this.bufferSelectId
+      )
+        this.options.widgetSelect = false
       this.currentSelectId = this.bufferSelectId
     },
     hanleSelect(id) {
       this.options.widgetSelect = false
       this.currentSelectId = id
+      this.bufferSelectId = id
       this.options.widgetSelect = true
     }
   }

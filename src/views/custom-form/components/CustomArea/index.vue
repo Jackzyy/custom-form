@@ -1,5 +1,11 @@
 <template>
-  <el-form class="custom-area">
+  <el-form
+    class="custom-area"
+    :label-width="formConfig.lableWidth + 'px'"
+    :label-position="formConfig.labelPosition"
+    :size="formConfig.size"
+    :style="formConfig.styles"
+  >
     <span class="custom-area-tips" v-if="!formOptions.length">
       从左侧拖拽添加表单组件
     </span>

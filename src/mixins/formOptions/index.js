@@ -12,6 +12,7 @@ export default {
 
   computed: {
     ...mapFields([
+      'formConfig',
       'formOptions',
       'formData',
       'currentSelectId',

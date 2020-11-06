@@ -1,7 +1,5 @@
 /**
- * 组件基础属性统一出口
- * @param attributes 组件属性
- * @param children 布局组件属性专属
+ * 表单组件基础属性统一出口
  */
 export const basicProps = [
   {
@@ -44,16 +42,21 @@ export const layoutProps = [
     children: [
       {
         id: 1,
-        type: 'blankTemp',
         span: 12,
         children: []
       },
       {
-        id: 1,
-        type: 'blankTemp',
+        id: 2,
         span: 12,
         children: []
       }
     ]
   }
 ]
+
+export const formConfig = {
+  lableWidth: '100',
+  labelPosition: 'right',
+  size: '',
+  styles: ''
+}

@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { getField, updateField } from 'vuex-map-fields'
+import { formConfig } from '@/components/Elements'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    formConfig,
     formOptions: [], // 自定义表单结构
     formData: {}, // 自定义表单数据
     bufferSelectId: -1, // 自定义组件库Clone事件组件Id，赋值缓冲备用

@@ -11,18 +11,20 @@
       />
     </el-tab-pane>
     <el-tab-pane label="表单属性" name="second">
-      <span>表单属性</span>
+      <FormConfig class="custom-set-attr" />
     </el-tab-pane>
   </el-tabs>
 </template>
 
 <script>
 import DynamicLink from '@/components/DynamicLink'
+import FormConfig from './form-config'
 import formOptions from '@/mixins/formOptions'
 export default {
   mixins: [formOptions],
   components: {
-    DynamicLink
+    DynamicLink,
+    FormConfig
   },
 
   data() {

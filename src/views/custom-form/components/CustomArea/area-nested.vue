@@ -20,7 +20,7 @@
         :type="item.type"
         :key="item.id"
       >
-        <AreaNested :_formOptions="item.children" :list="item.children" />
+        <AreaNested :_formOptions="item.children" />
       </DynamicLink>
       <!-- business components -->
       <el-form-item v-else :key="item.id" :label="item.name">

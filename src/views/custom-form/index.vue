@@ -7,7 +7,7 @@
 
     <!-- 组件拖拽回显区域 -->
     <el-col :span="16" class="draggable-echo">
-      <CustomPre />
+      <CustomHead />
       <CustomArea />
     </el-col>
 
@@ -19,13 +19,13 @@
 </template>
 
 <script>
-import CustomPre from './components/CustomPre'
+import CustomHead from './components/CustomHead'
 import CustomLib from './components/CustomLib'
 import CustomArea from './components/CustomArea'
 import CustomSet from './components/CustomSet'
 export default {
   components: {
-    CustomPre,
+    CustomHead,
     CustomArea,
     CustomLib,
     CustomSet

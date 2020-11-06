@@ -11,7 +11,16 @@ export default {
   },
 
   computed: {
-    ...mapFields(['formOptions', 'currentSelectId', 'bufferSelectId']),
+    ...mapFields([
+      'formOptions',
+      'formData',
+      'currentSelectId',
+      'bufferSelectId'
+    ]),
+    // preview data must deep clone
+    preFormOptions() {
+      return JSON.parse(JSON.stringify(this.formOptions))
+    },
     options() {
       return this.searchOptions(this.formOptions, this.currentSelectId)
     },
@@ -24,6 +33,12 @@ export default {
       return this.data.attributes
     }
   },
+
+  // watch: {
+  //   formOptions(newVal) {
+  //     this.formData = newVal
+  //   }
+  // },
 
   methods: {
     // recursive search currentSelectCom

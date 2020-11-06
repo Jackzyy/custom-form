@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="100" src="https://raw.githubusercontent.com/Jackzyy/vue-custom-form/master/src/assets/logo.png">
+  <img width="200" src="https://raw.githubusercontent.com/Jackzyy/vue-custom-form/master/src/assets/logo.png">
 </p>
 
 <p align="center">

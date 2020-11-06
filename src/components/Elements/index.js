@@ -31,7 +31,10 @@ export const layoutProps = [
     type: 'card',
     icon: 'icon-qiapian',
     name: '卡片',
-    attributes: {},
+    attributes: {
+      shadow: 'always',
+      styles: ''
+    },
     children: []
   },
   {

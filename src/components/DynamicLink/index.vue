@@ -37,12 +37,17 @@ export default {
 
   computed: {
     loader() {
-      if (this.type && this.option)
-        return () =>
-          import(`@/components/Elements/${this.titleCase(this.type)}/options`)
+      let elementPosition = this.data.children
+        ? 'LayoutElements'
+        : 'BaseElemets'
+      let elementOption = this.option ? 'options' : ''
       if (this.type)
         return () =>
-          import(`@/components/Elements/${this.titleCase(this.type)}`)
+          import(
+            `@/components/Elements/${elementPosition}/${this.titleCase(
+              this.type
+            )}/${elementOption}`
+          )
       return () => Promise.reject()
     }
   },
@@ -76,7 +81,7 @@ export default {
     },
 
     titleCase(str) {
-      return str.toLowerCase().replace(/( |^)[a-z]/g, L => L.toUpperCase())
+      return str.charAt(0).toUpperCase() + str.slice(1)
     }
   }
 }

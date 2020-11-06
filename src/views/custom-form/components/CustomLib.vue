@@ -2,14 +2,29 @@
   <div class="custom-area">
     <span class="custom-area-title">基础组件</span>
     <Draggable
-      :list="basicProp"
+      :list="basicProps"
       v-bind="dragOptions"
       :group="{ name: 'draggable', pull: 'clone', put: false }"
       :clone="cloneEle"
       :sort="false"
     >
       <Cell
-        v-for="ele in basicProp"
+        v-for="ele in basicProps"
+        :key="ele.id"
+        :icon="ele.icon"
+        :name="ele.name"
+      />
+    </Draggable>
+    <span class="custom-area-title">布局组件</span>
+    <Draggable
+      :list="layoutProps"
+      v-bind="dragOptions"
+      :group="{ name: 'draggable', pull: 'clone', put: false }"
+      :clone="cloneEle"
+      :sort="false"
+    >
+      <Cell
+        v-for="ele in layoutProps"
         :key="ele.id"
         :icon="ele.icon"
         :name="ele.name"
@@ -20,7 +35,7 @@
 
 <script>
 let idGlobal = 999
-import basicProp from '@/components/Elements'
+import { basicProps, layoutProps } from '@/components/Elements'
 import Draggable from 'vuedraggable'
 import Cell from '@/components/Cell'
 import formOptions from '@/mixins/formOptions'
@@ -33,7 +48,8 @@ export default {
 
   data() {
     return {
-      basicProp
+      basicProps,
+      layoutProps
     }
   },
 

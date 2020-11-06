@@ -13,16 +13,31 @@
       :widgetSelect="item.widgetSelect"
       @click.native.stop="hanleSelect(item.id)"
     >
-      <!-- layout components -->
+      <!--card layout components -->
       <DynamicLink
-        v-if="item.children"
+        v-if="item.type === 'card'"
         :data="item"
         :type="item.type"
         :key="item.id"
       >
         <AreaNested :_formOptions="item.children" />
       </DynamicLink>
-      <!-- business components -->
+      <!--grid layout components -->
+      <DynamicLink
+        v-else-if="item.type === 'grid'"
+        :data="item"
+        :type="item.type"
+        :key="item.id"
+      >
+        <el-col
+          v-for="(col, index) in item.children"
+          :key="index"
+          :span="col.span"
+        >
+          <AreaNested :_formOptions="col.children" />
+        </el-col>
+      </DynamicLink>
+      <!-- base components -->
       <el-form-item v-else :key="item.id" :label="item.name">
         <DynamicLink :data="item" :type="item.type" :key="item.id" />
       </el-form-item>

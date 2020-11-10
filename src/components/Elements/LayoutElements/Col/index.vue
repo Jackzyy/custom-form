@@ -1,7 +1,7 @@
 <template>
-  <el-row class="grid">
+  <el-col class="grid-col" :span="8">
     <slot />
-  </el-row>
+  </el-col>
 </template>
 
 <script>
@@ -12,8 +12,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.grid {
+.grid-col {
+  height: 50px;
   border: 1px solid #000;
-  height: 500px;
 }
 </style>

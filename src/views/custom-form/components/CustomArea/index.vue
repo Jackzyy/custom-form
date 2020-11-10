@@ -26,7 +26,7 @@ export default {
 
 <style lang="scss" scoped>
 .custom-area {
-  height: calc(100vh - 60px);
+  height: calc(100vh - 80px);
   padding: 10px;
   position: relative;
   box-sizing: border-box;

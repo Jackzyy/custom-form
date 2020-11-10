@@ -13,29 +13,14 @@
       :widgetSelect="item.widgetSelect"
       @click.native.stop="hanleSelect(item.id)"
     >
-      <!--card layout components -->
+      <!-- layout components -->
       <DynamicLink
-        v-if="item.type === 'card'"
+        v-if="item.children"
         :data="item"
         :type="item.type"
         :key="item.id"
       >
         <AreaNested :_formOptions="item.children" />
-      </DynamicLink>
-      <!--grid layout components -->
-      <DynamicLink
-        v-else-if="item.type === 'grid'"
-        :data="item"
-        :type="item.type"
-        :key="item.id"
-      >
-        <el-col
-          v-for="(col, index) in item.children"
-          :key="index"
-          :span="col.span"
-        >
-          <AreaNested :_formOptions="col.children" />
-        </el-col>
       </DynamicLink>
       <!-- base components -->
       <el-form-item v-else :key="item.id" :label="item.name">
@@ -99,5 +84,6 @@ export default {
 <style lang="scss" scoped>
 .area-nested {
   height: 100%;
+  padding-bottom: 20px;
 }
 </style>

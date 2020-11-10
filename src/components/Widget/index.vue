@@ -22,8 +22,8 @@ export default {
   border: 1px dashed rgba(0, 0, 0, 0);
 }
 .widget-focus {
-  position: relative;
   padding: 10px 20px;
+  position: relative;
   border-radius: 5px;
   border: 1px dashed #409eff;
 }

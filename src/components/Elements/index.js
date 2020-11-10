@@ -1,5 +1,5 @@
 /**
- * 表单组件基础属性统一出口
+ * 表单组件属性统一出口
  */
 export const basicProps = [
   {
@@ -14,14 +14,6 @@ export const basicProps = [
       pattern: '',
       placeholder: '',
       disabled: false
-    }
-  },
-  {
-    type: 'button',
-    icon: 'icon-anniu',
-    name: '按钮',
-    attributes: {
-      type: 'primary'
     }
   }
 ]
@@ -38,22 +30,18 @@ export const layoutProps = [
     children: []
   },
   {
-    type: 'grid',
+    type: 'row',
     icon: 'icon-zhagebuju',
-    name: '栅格布局',
+    name: '栅格-行',
     attributes: {},
-    children: [
-      {
-        id: 1,
-        span: 12,
-        children: []
-      },
-      {
-        id: 2,
-        span: 12,
-        children: []
-      }
-    ]
+    children: []
+  },
+  {
+    type: 'col',
+    icon: 'icon-zhagebuju',
+    name: '栅格-列',
+    attributes: {},
+    children: []
   }
 ]
 

@@ -1,6 +1,7 @@
 <template>
-  <div class="card-options">
-    Grid
+  <div>
+    2222
+    <slot name="aaa"></slot>
   </div>
 </template>
 

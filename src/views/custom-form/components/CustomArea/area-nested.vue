@@ -15,7 +15,7 @@
     >
       <!-- layout components -->
       <DynamicLink
-        v-if="item.children"
+        v-if="item.children && item.type"
         :data="item"
         :type="item.type"
         :key="item.id"
@@ -23,7 +23,11 @@
         <AreaNested :_formOptions="item.children" />
       </DynamicLink>
       <!-- base components -->
-      <el-form-item v-else :key="item.id" :label="item.name">
+      <el-form-item
+        v-if="!item.children && item.type"
+        :key="item.id"
+        :label="item.name"
+      >
         <DynamicLink :data="item" :type="item.type" :key="item.id" />
       </el-form-item>
     </Widget>

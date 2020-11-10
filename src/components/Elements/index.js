@@ -30,18 +30,24 @@ export const layoutProps = [
     children: []
   },
   {
-    type: 'row',
+    type: 'grid',
     icon: 'icon-zhagebuju',
-    name: '栅格-行',
+    name: '栅格布局',
     attributes: {},
-    children: []
-  },
-  {
-    type: 'col',
-    icon: 'icon-zhagebuju',
-    name: '栅格-列',
-    attributes: {},
-    children: []
+    children: [
+      {
+        id: 1,
+        span: 12,
+        attributes: {},
+        children: []
+      },
+      {
+        id: 2,
+        span: 12,
+        attributes: {},
+        children: []
+      }
+    ]
   }
 ]
 

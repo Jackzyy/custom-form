@@ -67,7 +67,7 @@ export default {
   methods: {
     cloneEle(val) {
       let afterCloneId = ++idGlobal
-      // trigger clone event, but the drag is not complete, so add bufferSelectId to solve the problem
+      // trigger clone event, but the drag is not completed, so add bufferSelectId to solve the problem
       this.bufferSelectId = afterCloneId
       return {
         // deep clone

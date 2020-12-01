@@ -20,7 +20,9 @@
         :type="item.type"
         :key="item.id"
       >
-        <AreaNested :_formOptions="item.children" />
+        <el-col v-for="col in item.children" :key="col.id" :span="col.span">
+          <AreaNested :_formOptions="col.children" />
+        </el-col>
       </DynamicLink>
       <!-- base components -->
       <el-form-item
